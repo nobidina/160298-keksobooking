@@ -1,7 +1,5 @@
 'use strict';
 
-var map = document.querySelector('.map');
-
 var getRandomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -66,26 +64,21 @@ var getAdsList = function () {
   return ads;
 };
 
-var ads = getAdsList();
-
-var showMap = function () {
+var showMap = function (map) {
   map.classList.remove('map--faded');
 };
 
 var renderPin = function (ad) {
   var location = ad.location;
-  var adLocationX = location.x;
-  var adLocationY = location.y;
   var author = ad.author;
-  var adAvatar = author.avatar;
 
   var pin = document.createElement('button');
   pin.className = 'map__pin';
-  pin.style.left = adLocationX + 'px';
-  pin.style.top = adLocationY + 'px';
+  pin.style.left = location.x + 'px';
+  pin.style.top = location.y + 'px';
 
   var img = document.createElement('img');
-  img.src = adAvatar;
+  img.src = author.avatar;
   img.width = 40;
   img.height = 40;
   img.draggable = false;
@@ -94,7 +87,7 @@ var renderPin = function (ad) {
   return pin;
 };
 
-var renderPins = function () {
+var renderPins = function (ads) {
   var mapPins = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
 
@@ -105,7 +98,7 @@ var renderPins = function () {
   mapPins.appendChild(fragment);
 };
 
-var renderAd = function () {
+var renderAd = function (ads, map) {
   var adTemplate = document.querySelector('template').content.querySelector('article.map__card');
   var adElement = adTemplate.cloneNode(true);
   var ad = ads[0];
@@ -152,9 +145,11 @@ var renderAd = function () {
 };
 
 var showMapOptions = function () {
-  renderPins();
-  renderAd();
-  showMap();
+  var map = document.querySelector('.map');
+  var ads = getAdsList();
+  renderPins(ads);
+  renderAd(ads, map);
+  showMap(map);
 };
 
 showMapOptions();
