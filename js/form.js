@@ -13,6 +13,11 @@
   var selectRoomNumber = noticeForm.querySelector('#room_number');
   var selectCapacity = noticeForm.querySelector('#capacity');
   var selectCapacityOptions = selectCapacity.querySelectorAll('option');
+  var MAIN_PIN_SHIFT = 53;
+
+  window.setInputAddressValue = function (x, y) {
+    inputAddress.value = 'x: ' + x + ', ' + 'y: ' + (y + MAIN_PIN_SHIFT);
+  };
 
   selectTimeIn.addEventListener('change', function (event) {
     selectTimeOut.value = event.target.value;
