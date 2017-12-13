@@ -96,4 +96,15 @@
       setError(inputPrice);
     }
   });
+
+  // отправляем данные формы
+  noticeForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+
+    var successHandler = function () {
+      noticeForm.reset();
+    };
+
+    window.backend.save(new FormData(noticeForm), successHandler, window.backend.errorHandler);
+  });
 })(window.noticeForm);

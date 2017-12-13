@@ -1,6 +1,6 @@
 'use strict';
 
-(function (map, mapPins, classMapPinActive, ads) {
+(function (map, mapPins, classMapPinActive) {
   var BTN_ESC = 27;
   var adElement;
   var popupClose;
@@ -63,7 +63,7 @@
   };
 
   // создаем объявление
-  window.renderAd = function (mapPinIndex) {
+  window.renderAd = function (mapPinIndex, ads) {
     var adTemplate = document.querySelector('template').content.querySelector('article.map__card');
     adElement = adTemplate.cloneNode(true);
     var ad = ads[mapPinIndex];

@@ -1,6 +1,6 @@
 'use strict';
 
-(function (ads) {
+(function () {
   var BTN_ENTER = 13;
 
   // делаем разметку одной метки на карте
@@ -28,14 +28,14 @@
     var pinClickHandler = function (evt) {
       var eventTarget = evt.target;
       var target = eventTarget.parentElement;
-      window.showCard(evt, target);
+      window.showCard(evt, target, window.ads);
     };
 
     var pinEnterPressHandler = function (evt) {
       var eventTarget = evt.target;
       var target = eventTarget;
       if (evt.keyCode === BTN_ENTER) {
-        window.showCard(evt, target);
+        window.showCard(evt, target, window.ads);
       }
     };
 
@@ -44,14 +44,14 @@
   };
 
   // вставляем метки на карту
-  window.renderPins = function (mapPins) {
+  window.renderPins = function (mapPins, ads) {
     var fragment = document.createDocumentFragment();
 
-    for (var j = 0; j < ads.length; j++) {
+    for (var j = 0; j < 7; j++) {
       fragment.appendChild(renderPin(ads[j]));
     }
 
     mapPins.appendChild(fragment);
     setupOpenAd(mapPins);
   };
-})(window.ads);
+})();

@@ -5,7 +5,7 @@ var mapPins = document.querySelector('.map__pins');
 var noticeForm = document.querySelector('.notice__form');
 var mapMainPin = document.querySelector('.map__pin--main');
 window.classMapPinActive = 'map__pin--active';
-var ads = window.getAdsList();
+var ads = window.ads;
 
 (function () {
   // показать карту
