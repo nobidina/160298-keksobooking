@@ -28,14 +28,14 @@
     var pinClickHandler = function (evt) {
       var eventTarget = evt.target;
       var target = eventTarget.parentElement;
-      window.ad.openAd(evt, target);
+      window.showCard(evt, target);
     };
 
     var pinEnterPressHandler = function (evt) {
       var eventTarget = evt.target;
       var target = eventTarget;
       if (evt.keyCode === BTN_ENTER) {
-        window.ad.openAd(evt, target);
+        window.showCard(evt, target);
       }
     };
 

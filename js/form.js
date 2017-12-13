@@ -2,8 +2,8 @@
 
 (function (noticeForm) {
   // сценарии взаимодействия пользователя с формой отправки данных
-  // написала переменные тут, чтобы потом по модулям удобнее было разбивать
-
+  var MAIN_PIN_SHIFT = 53;
+  var INPUT_PRICE_MIN_VALUES = [1000, 0, 5000, 10000];
   var inputTitle = noticeForm.querySelector('#title');
   var inputAddress = noticeForm.querySelector('#address');
   var selectTimeIn = noticeForm.querySelector('#timein');
@@ -13,31 +13,38 @@
   var selectRoomNumber = noticeForm.querySelector('#room_number');
   var selectCapacity = noticeForm.querySelector('#capacity');
   var selectCapacityOptions = selectCapacity.querySelectorAll('option');
-  var MAIN_PIN_SHIFT = 53;
+  var selectTimeInOptions = selectTimeIn.querySelectorAll('option');
+  var selectTimeOutOptions = selectTimeOut.querySelectorAll('option');
+  var selectTypeOptions = selectType.querySelectorAll('option');
 
   window.setInputAddressValue = function (x, y) {
     inputAddress.value = 'x: ' + x + ', ' + 'y: ' + (y + MAIN_PIN_SHIFT);
   };
 
-  selectTimeIn.addEventListener('change', function (event) {
-    selectTimeOut.value = event.target.value;
-  });
-
-  selectTimeOut.addEventListener('change', function (event) {
-    selectTimeIn.value = event.target.value;
-  });
-
-  selectType.addEventListener('change', function () {
-    if (selectType.value === 'bungalo') {
-      inputPrice.min = '0';
-    } if (selectType.value === 'flat') {
-      inputPrice.min = '1000';
-    } if (selectType.value === 'house') {
-      inputPrice.min = '5000';
-    } if (selectType.value === 'palace') {
-      inputPrice.min = '10000';
+  // конвертируем nodeList в массив
+  var nodeListToArray = function (nodeList) {
+    var array = [];
+    for (var i = 0; i < nodeList.length; i++) {
+      array[i] = nodeList[i].value;
     }
-  });
+    return array;
+  };
+
+  selectTimeInOptions = nodeListToArray(selectTimeInOptions);
+  selectTimeOutOptions = nodeListToArray(selectTimeOutOptions);
+  selectTypeOptions = nodeListToArray(selectTypeOptions);
+
+  var syncValues = function (element, value) {
+    element.value = value;
+  };
+
+  var syncValueWithMin = function (element, value) {
+    element.min = value;
+  };
+
+  window.synchronizeFields(selectTimeIn, selectTimeOut, selectTimeInOptions, selectTimeOutOptions, syncValues);
+  window.synchronizeFields(selectTimeOut, selectTimeIn, selectTimeOutOptions, selectTimeInOptions, syncValues);
+  window.synchronizeFields(selectType, inputPrice, selectTypeOptions, INPUT_PRICE_MIN_VALUES, syncValueWithMin);
 
   var selectCapacityChangeHandler = function () {
     while (selectCapacity.firstChild) {
