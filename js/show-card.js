@@ -15,7 +15,7 @@
     return mapPinsIndexList;
   };
   // открытие карточки объявления
-  window.showCard = function (evt, target) {
+  window.showCard = function (evt, target, ads) {
     var mapPinsIndexList = getMapPinsIndexList();
     var mapPinActive = document.querySelector('.' + classMapPinActive);
 
@@ -28,7 +28,7 @@
       target.classList.add(classMapPinActive);
 
       if (mapPinIndex !== -1) {
-        window.renderAd(mapPinIndex);
+        window.renderAd(mapPinIndex, ads);
       }
     }
   };
