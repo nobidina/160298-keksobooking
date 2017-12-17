@@ -1,7 +1,7 @@
 'use strict';
 
 var map = document.querySelector('.map');
-var mapPins = document.querySelector('.map__pins');
+var mapPinsBlock = document.querySelector('.map__pins');
 var noticeForm = document.querySelector('.notice__form');
 var mapMainPin = document.querySelector('.map__pin--main');
 window.classMapPinActive = 'map__pin--active';
@@ -15,7 +15,7 @@ var ads = window.ads;
 
   // показать карту с метками
   var showMapOptions = function () {
-    window.renderPins(mapPins, ads);
+    window.renderPins(mapPinsBlock, ads, 5);
     showMap(map);
   };
 

@@ -1,9 +1,9 @@
 'use strict';
 
-(function (mapPins, classMapPinActive) {
+(function (mapPinsBlock, classMapPinActive) {
   // получаем индексированный список маркеров
   var getMapPinsIndexList = function () {
-    var mapPin = mapPins.querySelectorAll('.map__pin');
+    var mapPin = mapPinsBlock.querySelectorAll('.map__pin');
     var mapPinsIndexList = [];
 
     for (var i = 0; i < mapPin.length; i++) {
@@ -32,4 +32,4 @@
       }
     }
   };
-})(window.mapPins, window.classMapPinActive);
+})(window.mapPinsBlock, window.classMapPinActive);

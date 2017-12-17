@@ -1,6 +1,6 @@
 'use strict';
 
-(function (map, mapPins, classMapPinActive) {
+(function (map, mapPinsBlock, classMapPinActive) {
   var BTN_ESC = 27;
   var adElement;
   var popupClose;
@@ -41,7 +41,7 @@
   // закрытие карточки объявления
   var closeAd = function () {
     map.removeChild(adElement);
-    mapPins.querySelector('.' + classMapPinActive).classList.remove(classMapPinActive);
+    mapPinsBlock.querySelector('.' + classMapPinActive).classList.remove(classMapPinActive);
 
     popupClose.removeEventListener('click', buttonCloseClickHandler);
     map.removeEventListener('keydown', buttonCloseEscPressHandler);
@@ -92,4 +92,4 @@
     setupCloseAd();
   };
 
-})(window.map, window.mapPins, window.classMapPinActive, window.ads);
+})(window.map, window.mapPinsBlock, window.classMapPinActive, window.ads);

@@ -23,35 +23,49 @@
     return pin;
   };
 
-  var setupOpenAd = function (mapPins) {
+  var setupOpenAd = function (mapPinsBlock) {
 
     var pinClickHandler = function (evt) {
       var eventTarget = evt.target;
       var target = eventTarget.parentElement;
-      window.showCard(evt, target, window.ads);
+      window.showCard(evt, target, window.filteredAds);
     };
 
     var pinEnterPressHandler = function (evt) {
       var eventTarget = evt.target;
       var target = eventTarget;
       if (evt.keyCode === BTN_ENTER) {
-        window.showCard(evt, target, window.ads);
+        window.showCard(evt, target, window.filteredAds);
       }
     };
 
-    mapPins.addEventListener('click', pinClickHandler);
-    mapPins.addEventListener('keydown', pinEnterPressHandler);
+    mapPinsBlock.addEventListener('click', pinClickHandler);
+    mapPinsBlock.addEventListener('keydown', pinEnterPressHandler);
   };
 
   // вставляем метки на карту
-  window.renderPins = function (mapPins, ads) {
+  window.renderPins = function (mapPinsBlock, ads, adsLength) {
     var fragment = document.createDocumentFragment();
 
-    for (var j = 0; j < 7; j++) {
+    var mapPins = mapPinsBlock.querySelectorAll('.map__pin');
+    for (var i = 0; i < mapPins.length; i++) {
+      if (mapPins[i] && !mapPins[i].classList.contains('map__pin--main') && mapPins[i].tagName === 'BUTTON') {
+        mapPinsBlock.removeChild(mapPins[i]);
+      }
+    }
+
+    if (!adsLength) {
+      adsLength = ads.length;
+      if (adsLength > 5) {
+        adsLength = 5;
+      }
+    }
+
+    for (var j = 0; j < adsLength; j++) {
       fragment.appendChild(renderPin(ads[j]));
     }
 
-    mapPins.appendChild(fragment);
-    setupOpenAd(mapPins);
+    mapPinsBlock.appendChild(fragment);
+    setupOpenAd(mapPinsBlock);
   };
 })();
