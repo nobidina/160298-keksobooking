@@ -44,7 +44,7 @@
     mapPinsBlock.querySelector('.' + classMapPinActive).classList.remove(classMapPinActive);
 
     popupClose.removeEventListener('click', buttonCloseClickHandler);
-    map.removeEventListener('keydown', buttonCloseEscPressHandler);
+    document.removeEventListener('keydown', buttonCloseEscPressHandler);
   };
 
   var buttonCloseClickHandler = function () {
@@ -59,7 +59,7 @@
 
   var setupCloseAd = function () {
     popupClose.addEventListener('click', buttonCloseClickHandler);
-    map.addEventListener('keydown', buttonCloseEscPressHandler);
+    document.addEventListener('keydown', buttonCloseEscPressHandler);
   };
 
   // создаем объявление

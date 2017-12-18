@@ -3,22 +3,22 @@
 (function () {
   var SERVER_URL = 'https://1510.dump.academy/keksobooking';
 
-  var setup = function (onLoad, onError) {
+  var setup = function (loadHandler, errorHandler) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        onLoad(xhr.response);
+        loadHandler(xhr.response);
       } else {
-        onError('Произошла ошибка: ' + xhr.status);
+        errorHandler('Произошла ошибка: ' + xhr.status);
       }
     });
     xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
+      errorHandler('Произошла ошибка соединения');
     });
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      errorHandler('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
     xhr.timeout = 10000;
@@ -27,14 +27,14 @@
   };
 
   window.backend = {
-    save: function (data, onLoad, onError) {
-      var xhr = setup(onLoad, onError);
+    save: function (data, loadHandler, errorHandler) {
+      var xhr = setup(loadHandler, errorHandler);
 
       xhr.open('POST', SERVER_URL);
       xhr.send(data);
     },
-    load: function (onLoad, onError) {
-      var xhr = setup(onLoad, onError);
+    load: function (loadHandler, errorHandler) {
+      var xhr = setup(loadHandler, errorHandler);
 
       xhr.open('GET', SERVER_URL + '/data');
       xhr.send();

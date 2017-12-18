@@ -7,13 +7,13 @@
   var renderPin = function (ad) {
     var location = ad.location;
     var author = ad.author;
-
     var pin = document.createElement('button');
+    var img = document.createElement('img');
+
     pin.className = 'map__pin';
     pin.style.left = location.x + 'px';
     pin.style.top = location.y + 'px';
 
-    var img = document.createElement('img');
     img.src = author.avatar;
     img.width = 40;
     img.height = 40;
@@ -27,7 +27,7 @@
 
     var pinClickHandler = function (evt) {
       var eventTarget = evt.target;
-      var target = eventTarget.parentElement;
+      var target = eventTarget.tagName === 'BUTTON' ? eventTarget : eventTarget.parentElement;
       window.showCard(evt, target, window.filteredAds);
     };
 

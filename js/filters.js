@@ -1,6 +1,12 @@
 'use strict';
 
 (function (mapPinsBlock) {
+  var TYPE_ANY = 'any';
+  var PRICE_LOW = 'low';
+  var PRICE_MIDDLE = 'middle';
+  var PRICE_HIGH = 'high';
+  var PRICE_LOW_NUMBER = 10000;
+  var PRICE_HIGH_NUMBER = 50000;
   var filterType = document.querySelector('#housing-type');
   var filterPrice = document.querySelector('#housing-price');
   var filterRooms = document.querySelector('#housing-rooms');
@@ -13,10 +19,10 @@
   var filterElevator = filterFeaturesBlock.querySelector('#filter-elevator');
   var filterConditioner = filterFeaturesBlock.querySelector('#filter-conditioner');
 
-  var filterTypeValue = 'any';
-  var filterPriceValue = 'any';
-  var filterRoomsValue = 'any';
-  var filterGuestsNumberValue = 'any';
+  var filterTypeValue = TYPE_ANY;
+  var filterPriceValue = TYPE_ANY;
+  var filterRoomsValue = TYPE_ANY;
+  var filterGuestsNumberValue = TYPE_ANY;
   var filterWiFiChecked;
   var filterDishwasherChecked;
   var filterParkingChecked;
@@ -70,38 +76,38 @@
     var adFeatures = adOffer.features;
     var adPrice = adOffer.price;
 
-    if (filterTypeValue !== 'any' && adOffer.type !== filterTypeValue) {
+    if (filterTypeValue !== TYPE_ANY && adOffer.type !== filterTypeValue) {
       return false;
     }
-    if (filterPriceValue !== 'any' &&
-      (filterPriceValue === 'low' && adPrice >= 10000
-      || filterPriceValue === 'middle' && (adPrice <= 10000 || adPrice >= 50000)
-      || filterPriceValue === 'high' && adPrice <= 50000)
+    if (filterPriceValue !== TYPE_ANY &&
+      (filterPriceValue === PRICE_LOW && adPrice >= PRICE_LOW_NUMBER
+      || filterPriceValue === PRICE_MIDDLE && (adPrice <= PRICE_LOW_NUMBER || adPrice >= PRICE_HIGH_NUMBER)
+      || filterPriceValue === PRICE_HIGH && adPrice <= PRICE_HIGH_NUMBER)
     ) {
       return false;
     }
-    if (filterRoomsValue !== 'any' && adOffer.rooms !== filterRoomsValue * 1) {
+    if (filterRoomsValue !== TYPE_ANY && adOffer.rooms !== filterRoomsValue * 1) {
       return false;
     }
-    if (filterGuestsNumberValue !== 'any' && adOffer.guests !== filterGuestsNumberValue * 1) {
+    if (filterGuestsNumberValue !== TYPE_ANY && adOffer.guests !== filterGuestsNumberValue * 1) {
       return false;
     }
-    if (filterWiFiChecked === true && adFeatures.indexOf(filterWiFi.value) === -1) {
+    if (filterWiFiChecked && adFeatures.indexOf(filterWiFi.value) === -1) {
       return false;
     }
-    if (filterDishwasherChecked === true && adFeatures.indexOf(filterDishwasher.value) === -1) {
+    if (filterDishwasherChecked && adFeatures.indexOf(filterDishwasher.value) === -1) {
       return false;
     }
-    if (filterParkingChecked === true && adFeatures.indexOf(filterParking.value) === -1) {
+    if (filterParkingChecked && adFeatures.indexOf(filterParking.value) === -1) {
       return false;
     }
-    if (filterWasherChecked === true && adFeatures.indexOf(filterWasher.value) === -1) {
+    if (filterWasherChecked && adFeatures.indexOf(filterWasher.value) === -1) {
       return false;
     }
-    if (filterElevatorChecked === true && adFeatures.indexOf(filterElevator.value) === -1) {
+    if (filterElevatorChecked && adFeatures.indexOf(filterElevator.value) === -1) {
       return false;
     }
-    if (filterConditionerChecked === true && adFeatures.indexOf(filterConditioner.value) === -1) {
+    if (filterConditionerChecked && adFeatures.indexOf(filterConditioner.value) === -1) {
       return false;
     }
     return true;
