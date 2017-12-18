@@ -1,7 +1,7 @@
 'use strict';
 
 var map = document.querySelector('.map');
-var mapPins = document.querySelector('.map__pins');
+var mapPinsBlock = document.querySelector('.map__pins');
 var noticeForm = document.querySelector('.notice__form');
 var mapMainPin = document.querySelector('.map__pin--main');
 window.classMapPinActive = 'map__pin--active';
@@ -15,7 +15,7 @@ var ads = window.ads;
 
   // показать карту с метками
   var showMapOptions = function () {
-    window.renderPins(mapPins, ads);
+    window.renderPins(mapPinsBlock, ads, 3);
     showMap(map);
   };
 
@@ -40,7 +40,7 @@ var ads = window.ads;
       y: evt.clientY
     };
 
-    var onMouseMove = function (moveEvt) {
+    var mouseMoveHandler = function (moveEvt) {
       moveEvt.preventDefault();
 
       var shift = {
@@ -67,15 +67,15 @@ var ads = window.ads;
       window.setInputAddressValue(mapMainPinСoords.x, mapMainPinСoords.y);
     };
 
-    var onMouseUp = function (upEvt) {
+    var mouseUpHandler = function (upEvt) {
       upEvt.preventDefault();
 
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
     };
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
   };
 
   window.chooseHouse = function () {
