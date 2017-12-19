@@ -3,14 +3,14 @@
 (function (mapPinsBlock, classMapPinActive) {
   // получаем индексированный список маркеров
   var getMapPinsIndexList = function () {
-    var mapPin = mapPinsBlock.querySelectorAll('.map__pin');
+    var mapPins = mapPinsBlock.querySelectorAll('.map__pin');
     var mapPinsIndexList = [];
 
-    for (var i = 0; i < mapPin.length; i++) {
-      if (!mapPin[i].classList.contains('map__pin--main')) {
-        mapPinsIndexList.push(mapPin[i]);
+    mapPins.forEach(function (mapPin) {
+      if (!mapPin.classList.contains('map__pin--main')) {
+        mapPinsIndexList.push(mapPin);
       }
-    }
+    });
 
     return mapPinsIndexList;
   };

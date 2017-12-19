@@ -25,9 +25,11 @@ var ads = window.ads;
 
     noticeForm.classList.remove('.notice__form--disabled');
     showMapOptions();
-    for (var i = 0; i < formElements.length; i++) {
-      formElements[i].removeAttribute('disabled');
-    }
+
+    formElements.forEach(function (formElement) {
+      formElement.removeAttribute('disabled');
+    });
+
     mapMainPin.removeEventListener('mouseup', mouseupMapMainPinHandler);
   };
 

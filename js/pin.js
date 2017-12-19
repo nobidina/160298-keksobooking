@@ -46,13 +46,13 @@
   // вставляем метки на карту
   window.renderPins = function (mapPinsBlock, ads, adsLength) {
     var fragment = document.createDocumentFragment();
-
     var mapPins = mapPinsBlock.querySelectorAll('.map__pin');
-    for (var i = 0; i < mapPins.length; i++) {
-      if (mapPins[i] && !mapPins[i].classList.contains('map__pin--main') && mapPins[i].tagName === 'BUTTON') {
-        mapPinsBlock.removeChild(mapPins[i]);
+
+    mapPins.forEach(function (mapPin) {
+      if (mapPin && !mapPin.classList.contains('map__pin--main') && mapPin.tagName === 'BUTTON') {
+        mapPinsBlock.removeChild(mapPin);
       }
-    }
+    });
 
     if (!adsLength) {
       adsLength = ads.length;
