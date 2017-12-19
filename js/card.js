@@ -31,11 +31,11 @@
       featuresList.removeChild(featuresList.firstChild);
     }
 
-    for (var i = 0; i < offerFeatures.length; i++) {
+    offerFeatures.forEach(function (offerFeature) {
       var featuresListItem = document.createElement('li');
-      featuresListItem.className = 'feature feature--' + offerFeatures[i];
+      featuresListItem.className = 'feature feature--' + offerFeature;
       featuresList.appendChild(featuresListItem);
-    }
+    });
   };
 
   // закрытие карточки объявления
