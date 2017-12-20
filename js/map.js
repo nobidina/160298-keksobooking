@@ -2,6 +2,7 @@
 
 var map = document.querySelector('.map');
 var mapPinsBlock = document.querySelector('.map__pins');
+var PINS_NUMBER = 5;
 var noticeForm = document.querySelector('.notice__form');
 var mapMainPin = document.querySelector('.map__pin--main');
 window.classMapPinActive = 'map__pin--active';
@@ -15,7 +16,7 @@ var ads = window.ads;
 
   // показать карту с метками
   var showMapOptions = function () {
-    window.renderPins(mapPinsBlock, ads, 3);
+    window.renderPins(mapPinsBlock, ads, PINS_NUMBER);
     showMap(map);
   };
 
@@ -23,7 +24,7 @@ var ads = window.ads;
   var mouseupMapMainPinHandler = function () {
     var formElements = document.querySelectorAll('.form__element');
 
-    noticeForm.classList.remove('.notice__form--disabled');
+    noticeForm.classList.remove('notice__form--disabled');
     showMapOptions();
 
     formElements.forEach(function (formElement) {
