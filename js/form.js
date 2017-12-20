@@ -33,6 +33,10 @@
     fileReader.readAsDataURL(file);
   };
 
+  inputAvatar.addEventListener('change', function () {
+    handleLoadAvatar(inputAvatar.files[0]);
+  });
+
   avatarDropZone.addEventListener('dragover', function (e) {
     e.stopPropagation();
     e.preventDefault();
@@ -109,12 +113,12 @@
   selectRoomNumber.addEventListener('change', selectCapacityChangeHandler);
 
   // загрузка фотографий
+
   var handleLoadImages = function (files) {
     var IMG_WIDTH = '130px';
     var IMG_HEIGHT = '100px';
-    var uploadBlock = document.querySelector('.form__photo-container .upload');
+    var uploadBlock = document.querySelector('.form__photo-container');
     var fragment = document.createDocumentFragment();
-    var draggedElement;
 
     for (var i = 0; i < files.length; i++) {
       var fileReader = new FileReader();
@@ -129,19 +133,6 @@
         fileReader.addEventListener('load', function (evt) {
           image.src = evt.target.result;
         });
-        image.addEventListener('dragstart', function (evt) {
-          draggedElement = evt.target;
-        });
-        image.addEventListener('dragover', function (evt) {
-          evt.preventDefault();
-        });
-        image.addEventListener('drop', function (evt) {
-          if (evt.target.src !== draggedElement.src) {
-            var targetSrc = evt.target.src;
-            evt.target.src = draggedElement.src;
-            draggedElement.src = targetSrc;
-          }
-        });
       })(img);
 
       fileReader.readAsDataURL(files[i]);
@@ -149,6 +140,10 @@
       uploadBlock.appendChild(fragment);
     }
   };
+
+  imagesInput.addEventListener('change', function () {
+    handleLoadImages(imagesInput.files);
+  });
 
   imagesDropZone.addEventListener('dragover', function (e) {
     e.stopPropagation();
@@ -163,10 +158,7 @@
     var files = dataTransfer.files;
 
     imagesInput.files = files;
-
-    handleLoadImages(files);
   });
-  //
 
   var setError = function (element) {
     element.style.borderWidth = '2px';
