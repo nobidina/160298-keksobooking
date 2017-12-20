@@ -55,7 +55,7 @@
   };
 
   // конвертируем nodeList в массив
-  var nodeListToArray = function (nodeList) {
+  var convertNodeListToArray = function (nodeList) {
     var array = [];
 
     nodeList.forEach(function (nodeListItem) {
@@ -65,9 +65,9 @@
     return array;
   };
 
-  selectTimeInOptions = nodeListToArray(selectTimeInOptions);
-  selectTimeOutOptions = nodeListToArray(selectTimeOutOptions);
-  selectTypeOptions = nodeListToArray(selectTypeOptions);
+  selectTimeInOptions = convertNodeListToArray(selectTimeInOptions);
+  selectTimeOutOptions = convertNodeListToArray(selectTimeOutOptions);
+  selectTypeOptions = convertNodeListToArray(selectTypeOptions);
 
   var syncValues = function (element, value) {
     element.value = value;
